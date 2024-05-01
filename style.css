@@ -1,0 +1,394 @@
+body
+{
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    user-select: none;
+}
+#sidebar
+{
+    position: fixed;    
+    height: 100%;   
+    width: 250px;
+    background-color: rgb(20, 20, 20);
+    color: gray;
+    border-right: 1px solid gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.toggle 
+{
+    float: right;   
+    margin-right: 20px; 
+    background-color: rgb(30, 30, 30);
+    color: gray;
+    cursor: pointer;
+    border-radius: 5px;
+}   
+#object
+{
+    height: 80%;
+    width: 100%;
+    border: 1px solid gray;     
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: 500ms;
+}
+#sidebar button 
+{
+    background-color: rgb(30, 30, 30);
+    color: white;
+    border-radius: 5px;
+}
+#sidebar select
+{
+    background-color: rgb(30, 30, 30);
+    color: white;
+}
+#object input[type="text"]
+{
+    background-color: rgb(30, 30, 30);
+    color: lightblue;    
+    border-radius: 5px; 
+    margin-top: 5px;    
+}
+#menu   
+{
+    height: 300px;
+    width: 200px;   
+    background-color: rgb(25, 25, 25);
+    position: absolute;
+    left: 50%;      
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;   
+    color: royalblue;
+    text-align: center; 
+    font-family: serif;
+    transition: 300ms;  
+    opacity: 95%;
+    overflow-x: hidden;
+    overflow-y:scroll;
+    display: none;
+}
+#menu p
+{
+    cursor: pointer;
+}       
+#menu p:hover
+{   
+    color: gray;
+    border: 0.1px solid royalblue;
+    border-radius: 5px;
+}
+#componentsWindow
+{       
+    height: 500px;
+    width: 700px;
+    background-color: rgb(20, 20, 20);
+    color: gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    font-family: monospace; 
+    padding: 5px;
+    display: none;
+}
+#compCards
+{
+    display: flex;  
+    flex-wrap: wrap;
+}
+#compCards div
+{
+    height: 100px;
+    width: 80px;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    font-size: 10px;
+    color: lime;    
+    text-align: center;
+    transition: 300ms;
+    margin: 5px;
+}
+#compCards div:hover
+{
+    transform: scale(110%); 
+    cursor: pointer;
+}
+
+#COMP_RIGIDBODY
+{
+    height: 300px;
+    width: 100%;
+    border: 1px solid gray;
+    overflow-x: hidden;
+    overflow-y: scroll;     
+    display: none;
+}
+#claddScriptsWindow
+{
+    height: 500px;
+    width: 700px;
+    background-color: rgb(20, 20, 20);
+    color: gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: absolute;
+    top: 50%;   
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    padding: 10px;
+    display: none;
+}
+#allcladdscripts
+{
+    height: 85%;            
+    width: 99%; 
+    border: 1px solid gray;
+    display: flex;
+    flex-wrap: wrap;
+}
+#CSEW
+{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(20, 20, 20);
+    color: lime;
+    font-family: monospace;
+    display: none;
+}
+#CSEW_bar
+{
+    position: fixed;
+    height: 100%;
+    width: 250px;
+    border-right: 1px solid lime;
+    text-align: center;
+}
+#CSEW_bar p:hover
+{   
+    text-decoration: underline;
+}
+#CSEW_CONT
+{   
+    float: right;
+    height: 100%;
+    width: 80%;
+    background-color: black;
+    color: lime;
+    font-family: monospace;
+}  
+#compiledCladdScript
+{       
+    height: 500px;  
+    width: 600px;
+    color: yellow;
+    font-family: monospace;
+    background-color: rgb(20, 20, 20);
+    border: 1px solid black;
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    padding: 10px;  
+    display: none;  
+} 
+#compiledCladdScript_h
+{
+    height: 100%;
+    width: 90%; 
+    border: 1px solid gray;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    user-select:text;
+}
+#world
+{
+    height: 0px;
+    width: 100%;    
+    border: 1px solid gray;
+    color: gray;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: 300ms;
+}
+#world input[type='text']
+{
+    background-color: rgb(30, 30, 30);
+    color: lightblue;    
+    border-radius: 5px; 
+    margin-top: 5px;  
+}
+#system
+{
+    height: 0px;
+    width: 100%;
+    border: 1px solid gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: gray;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: 300ms;
+}
+#system input[type = 'text']
+{
+    background-color: rgb(30, 30, 30);
+    border-radius: 5px;
+    color: lightblue;
+}
+#CGA_data
+{
+    height: 200px;
+    width: 100%;
+    background-color: rgb(30, 30, 30);
+    color: lightblue;
+}
+#objectDataLog
+{
+    height: 520px;
+    width: 700px;
+    background-color: rgb(20, 20, 20);
+    color: gray;    
+    font-family: monospace;
+    position: absolute;
+    top: 50%;
+    left: 50%;  
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    padding: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    display: none;
+}
+#objectDataLog textarea
+{
+    background-color: rgb(30, 30, 30);
+    color: lightblue;
+}
+#prefabs
+{
+    height: 0px;
+    width: 100%;
+    border: 1px solid gray;
+    color: gray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    transition: 300ms;
+}
+#prefabs input[type='text']
+{
+    background-color: rgb(30, 30, 30);
+    color: lightblue;
+    border-radius: 5px;
+}
+#INSPECTOR_VIEW
+{
+    height: 450px;
+    width: 300px;
+    background-color: rgb(20, 20, 20);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    padding: 10px;
+    color: gray;
+    font-family: monospace;
+    display: none;
+}
+#INSPECTOR_VIEW select{background-color: rgb(30, 30, 30); color: white;}
+#selectObject
+{
+    background-color: rgb(30, 30, 30);
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 15px;
+    color: white;
+    font-family: monospace;
+}
+#selectedObjects
+{
+    height: 200px;
+    width: 99%;
+    border: 1px solid gray;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+#prefabs_tools
+{
+    height: 90%;
+    width: 100%;
+    background-color: rgb(30, 30, 30);
+    border-radius: 10px;
+    display: none;
+}
+#prefabsWindow
+{
+    height: 400px;
+    width: 400px;
+    background-color: rgb(20, 20, 20);
+    color: gray;
+    font-family: monospace;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    display: none;
+}
+#prefabLoadBox
+{
+    height: 85%;
+    width: 100%;    
+    background-color: rgb(40, 40, 40);
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+    
+}
+#selectedPrefabWindow
+{
+    height: 300px;
+    width: 250px;
+    background-color: rgb(20, 20, 20);
+    color: gray;
+    font-family: monospace;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(100%, -50%);
+    border-radius: 10px;
+    padding: 5px;
+    display: none;
+}
+#selectedPrefabWindow button
+{
+    background-color: rgb(30, 30, 30);
+    color: white;
+    font-family: monospace;
+    margin-bottom: 5px;
+}   
+.close
+{
+    float: right;
+    background-color: rgb(30, 30, 30);
+    border-radius: 2px;
+    color: white;
+}
+.close:hover
+{
+    cursor: pointer;
+    color: red;
+}   

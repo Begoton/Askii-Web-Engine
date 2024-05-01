@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix3D</title>
+</head>
+
+<body>
+    <!--SIDE BAR-->
+    <div id="sidebar">
+        <button id="play">Enter Play Mode</button>
+        <p id="moveMode">Movement Mode: Rotation</p>
+        <p>Component <button id="objects" class="toggle">&varr;</button></p>
+        <p>All Objects<button id="SI" style="float: right; display: none;">Activate Inspector</button></p>
+        <div id="object">
+            <select name="" id="selected_class"></select><br>
+            <button id="delete">Delete</button>
+            <button id="OPEN_VERTEX_DATA_LOG">Vertex log</button>
+            <button id="smenu">Menu</button>
+            <p>Name</p>
+            <input type="text" id="name">
+            <p>Position [x, y, z]</p>
+            <input type="text" id="x">
+            <input type="text" id="y">
+            <input type="text" id="z">
+            <p>Rotation [x, y, z]</p>
+            <input type="text" id="rotx">
+            <input type="text" id="roty">
+            <input type="text" id="rotz">
+            <p>Scale [x, y, z]</p>
+            <input type="text" id="scalex">
+            <input type="text" id="scaley">
+            <input type="text" id="scalez">
+            <p>Material [r, g, b]</p>
+            <input type="text" id="colorr">
+            <input type="text" id="colorg">
+            <input type="text" id="colorb">
+            <!--custom components-->
+            <div id="customGeometryAttribs">
+                <hr>
+                <p style="color:red;">Custom Geometry Component</p>
+                <p>Ghost movement</p>
+                <input type="text" id="CGA_ghostMovement">
+                <p>Vertices data</p>
+                <textarea name="" id="CGA_data" cols="30" rows="10"></textarea>
+                <p>Active</p>
+                <input type="checkbox" name="" id="CGA_active">
+                <p>Ghost position [x, y, z]</p>
+                <input type="text" id="ghostx">
+                <input type="text" id="ghosty">
+                <input type="text" id="ghostz">
+            </div>
+            <p style="color:lime;">Components</p>
+            <div id="COMP_RIGIDBODY">
+                <p>Rigidbody <button id="RID_RIGIDBODY">Remove component</button></p>
+                <p>Mass</p>
+                <input type="text" id="RIGID_MASS">
+                <p>Vertical acceleration</p>
+                <input type="text" id="RIGID_ACC">
+                <p>Velocity [x, y, z]</p>
+                <input type="text" id="RIGID_VELOCITYX">
+                <input type="text" id="RIGID_VELOCITYY">
+                <input type="text" id="RIGID_VELOCITYZ">
+            </div>
+            <div id="shellAttributes">
+                <hr>
+                <p style="color:red;">Shell Component</p>
+                <p>Children</p>
+                <button onclick="SetDisplay('INSPECTOR_VIEW','block')">Add Children</button>
+                <p>Draw Mode</p>
+                <select name="" id="AIVdrawMode">
+                    <option value="1" id="lineStrip">Line Strip</option>
+                    <option value="2" id="lineStrip">Triangle Strip</option>
+                    <option value="3" id="lineStrip">Triangle Fan</option>
+                    <option value="4" id="lineStrip">Triangles</option>
+                </select>
+            </div>
+            <button onclick="SetDisplay('claddScriptsWindow','block')">New Cladd Script</button>
+            <button onclick="SetDisplay('componentsWindow','block')" style="text-align: center;">Add Component</button>
+        </div>
+        <!--Add Component-->
+        <p>World <button id="toggle_world" class="toggle">&varr;</button></p>
+        <div id="world">
+            <p>Color [r, g, b, a]</p>
+            <input type="text" id="world_colorr">
+            <input type="text" id="world_colorg">
+            <input type="text" id="world_colorb">
+            <input type="text" id="world_colora">
+            <br><br>
+            <button onclick="UpdateWorld()">Apply</button>
+            <br><br>
+            <hr>
+            <p>Camera</p>
+            <p>Position [x, y, z]</p>
+            <input type="text" id="camerax">
+            <input type="text" id="cameray">
+            <input type="text" id="cameraz">
+            <p>Rotation [x, y, z]</p>
+            <input type="text" id="camrotx">
+            <input type="text" id="camroty">
+            <input type="text" id="camrotz">
+            <p>FOV - Radians</p>
+            <input type="text" id="cameraFOV">
+            <hr>
+            <p>Scene</p>
+            
+        </div>
+        <p>System <button class="toggle" id="toggle_system">&varr;</button></p>
+        <div id="system">
+            <p>Quick Movement Amount</p>
+            <input type="text" id="QM_amount">
+        </div>
+        <!--PREFABS-->
+        <p>Prefabs <button id="toggle_prefabs" class="toggle">&varr;</button></p>
+        <div id="prefabs">  
+            <button onclick="SetDisplay('prefabsWindow','block')" id="prefabs_load">See Loaded Prefabs</button>
+            <p>Object Name</p>  
+            <input type="text" id="prefabs_name">
+            <button id="prefabs_use">Search</button>
+            <p id="prefabs_error" style="color:red;font-family: monospace; display:none;">OBJECT NOT FOUND</p>
+            <div id="prefabs_tools">
+                <p>Prefab name</p>
+                <input type="text" id="prefabs_newName" placeholder="Create prefab name"><br>
+                <p>Draw mode</p>
+                <select name="" id="prefabs_dm">
+                    <option value="1">Lines</option>
+                    <option value="2">Triangle Strip</option>
+                    <option value="3">Triangle Fan</option>
+                    <option value="4">Triangles</option>
+                </select>
+                <button id="prefabs_save">Save Prefab</button>
+            </div>
+        </div>
+    </div>
+    <!--Saved prefabs-->    
+    <div id="prefabsWindow">
+        <p>Saved Prefabs <button id="loadPrefabs" style="background-color:rgb(20, 20, 20);color:white;border-radius:5px;">Load</button> <button onclick="SetDisplay('prefabsWindow','none'); SetDisplay('selectedPrefabWindow','none')" class="close">x</button></p>
+        <hr>
+        <div id="prefabLoadBox"></div>
+    </div>
+
+
+
+    <!--BREAK---------------------------------------------------------------------------------------->
+
+    <!--MENU-->   
+    <div id="menu">
+        <p id="close_menu" style="color:gray;" onclick="SetDisplay('menu', 'none')">Close</p>
+        <p id="add_triangle">Triangle</p>
+        <p id="add_plane">Plane</p>
+        <p id="add_circle" onclick="AddObject('circle')">Circle</p>
+        <p id="add_sphere" onclick="AddObject('sphere')">Sphere</p>
+        <p onclick="AddObject('box')">Box</p>
+        <p onclick="AddObject('terrain')">Terrain</p>
+        <p onclick="AddObject('custom')">Custom Geometry</p>
+        <p onclick="AddObject('shell')">Empty Shell</p>
+    </div>
+    <!--ADD COMPONENTS WINDOW-->
+    <div id="componentsWindow">
+        <p>Add Component <button class="close" id="closeComponentWindow"
+                onclick="SetDisplay('componentsWindow','none')">x</button></p>
+        <hr>
+        <div id="compCards">
+            <div id="compCard1">Rigidbody</div>
+            <div id="compCard2">Ground Collider</div>
+            <!---->
+        </div>
+    </div>
+    <div id="claddScriptsWindow">
+        <p>Cladd Scripts <button class="close" onclick="SetDisplay('claddScriptsWindow','none')">x</button> <input
+                type="text" id="CS_NAME"><button id="newCladdScript" onclick="NewCladdScript('')">Create Script</button>
+        </p>
+        <hr>
+        <div id="allcladdscripts"></div>
+    </div>
+    <div id="CSEW">
+        <div id="CSEW_bar">
+            <p id="COMPILE_CURRENT_SCRIPT"> &darr;Save & Exit</p>
+            <p onclick="ConvertFile()">&rarr; Compile</p>
+        </div>
+        <textarea name="" id="CSEW_CONT" cols="30" rows="10" spellcheck="false"></textarea>
+        <div id="compiledCladdScript">
+            <button class="close" onclick="SetDisplay('compiledCladdScript','none')">Close</button>
+            <div id="compiledCladdScript_h"></div>
+        </div>
+    </div>
+    <!--VERTEX AND DATA LOG-->
+    <div id="objectDataLog">
+        <p>Object Vertex Data <button onclick="SetDisplay('objectDataLog','none')" class="close">x</button></p>
+        <hr>
+        <p>Raw vertex (position)</p>
+        <textarea name="" id="rawVertexData" cols="30" rows="10"></textarea>
+        <p>Input data (position & material)</p>
+        <textarea name="" id="matandpos" cols="30" rows="10"></textarea>
+        <hr>
+        <p id="totalVertices">Total vertices: null</p>
+        <p id="totalElements">Vertex array length: null</p>
+    </div>
+    <div id="INSPECTOR_VIEW">
+        <p>Add Children - shell<button onclick="SetDisplay('INSPECTOR_VIEW', 'none')" class="close">x</button></p>
+        <hr>
+        <p>Object Select</p>
+        <select name="" id="AIV"></select>  <button id="ADD_SELECTED_OBJECT" style="background-color:rgb(30,30,30);color:white;font-family:monospace;">Add</button>
+        <p>Selected Objects</p>
+        <div id="selectedObjects"></div>
+        <p id="23-423434-234-4">Object Array Length: null</p>
+        <button id="selectObject">Combine Vertex Data</button>
+        <button id="selectObject2" style="background-color:rgb(30,30,30);color:white;font-family:monospace;">Make Fixed</button>
+    </div>
+    <div id="selectedPrefabWindow">
+        <p>Prefab Actions <button onclick="SetDisplay('selectedPrefabWindow','none')" class="close">x</button></p>  
+        <hr>
+        <p style="color:red;" id="001_name">PREFAB NAME</p>
+        <button id="001_create">Create Instance</button>
+        <button id="001_remove">Delete Prefab</button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+    <script src="CladdCompiler.js"></script>
+    <script src="objects.js"></script>
+    <script src="interface.js"></script>
+    <script src="pipeline.js"></script>
+</body>
+
+</html>
